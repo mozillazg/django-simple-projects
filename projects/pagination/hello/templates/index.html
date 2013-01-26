@@ -1,0 +1,27 @@
+{% for topic in topics.object_list %}
+  <p>{{ topic.title }}</p>
+{% endfor %}
+
+<p>
+  {# topics.paginator.page_range 这个函数返回包含一个所有页码数的 range 对象 #}
+  {# 即 range(1, topics.paginator.num_pages + 1) #}
+  {% for page_number in topics.paginator.page_range %}
+    {% ifequal page_number  topics.number %}
+      {{ page_number }}
+    {% else %}
+      <a href="?page={{ page_number }}">{{ page_number }}</a>
+    {% endifequal %}
+  {% endfor %}
+</p>
+
+
+<p>
+{% if topics.has_previous %}
+  <a href="?page={{ topics.previous_page_number }}">Previous</a>
+  {% endif %}
+  {# topics.paginator.number_pages 返回总页数 #}
+  Page {{ topics.number }} of {{ topics.paginator.num_pages }}.
+{% if topics.has_next %}
+  <a href="?page={{ topics.next_page_number }}">Next</a>
+{% endif %}
+</p>

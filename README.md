@@ -5,4 +5,4 @@ django 版本：1.3, 1.4
 
 一个项目，一个知识点：
 
-* 
+* pagination  使用 Paginator 实现分页功能
