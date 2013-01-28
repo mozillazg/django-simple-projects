@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div id="topic-content">
+  <h1>{{ topic.title }}</h1>
+  {{ topic.content }}
+</div>
+
+{% load comments %}
+{% get_comment_count for topic as comment_count %}
+<p>Comments({{ comment_count }}):</p>
+<div id="comments">
+  <!-- {% render_comment_list for topic %} -->
+
+  {% get_comment_list for topic as comment_list %}
+  {% for comment in comment_list %}
+    <p>  <a name="c{{ comment.id }}"></a>
+    <a href="{% get_comment_permalink comment %}">
+        #{{ forloop.counter }}
+    </a>
+    Posted by: {{ comment.user_name }} on {{ comment.submit_date }}</p>
+    <p>{{ comment.comment|linebreaks }}</p>
+  {% endfor %}
+
+  {% get_comment_form for topic as form %}
+  <form action="{% comment_form_target %}" method="post">
+    {% csrf_token %}
+    <!-- {{ form.as_p }} -->
+
+    <p><label for="id_name">Name: </label>{{ form.name }}</p>
+    <p><label for="id_email">E-mail: </label>{{ form.email }}</p>
+    <p><label for="id_url">Web Site: </label>{{ form.url }}</p>
+    <p><label for="id_comment">Comment: </label>{{ form.comment }}</p>
+    {{ form.content_type }}
+    {{ form.object_pk }}
+    {{ form.timestamp }}
+    {{ form.security_hash }}
+    <span style="display: none;">{{ form.honeypot }}</span>
+    <input type="hidden" name="next" value="/topic/{{ topic.id }}"/>
+
+    <input type="submit" value="Comment" />
+  </form>
+</div>
+{% endblock %}
