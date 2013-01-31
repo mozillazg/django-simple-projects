@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{% block title %}Hello forum{% endblock %}</title>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="/static/css/main.css" media="screen" charset="utf-8" />
+</head>
+<body>
+  <header id="header">
+    <div id="header-center">
+      <div id="forum-title"><h1><a href="/">Hello forum</a></h1></div>
+      <div id="user-tools">
+        {% if user.is_authenticated %}
+          <a href="/account">{{ user.username }}</a>
+          | <a href="/create">Create topic</a> |
+          <a href="/account/logout">Log Out</a>
+        {% else %}
+          <a href="/account/signin">Sign In</a>
+          or <a href="/account/signup">Sign Up</a>
+        {% endif %}
+      </div>
+    </div>
+  </header>
+  <nav id="nav">
+    <div id="nav-center">
+      <a href="/">Latest</a>
+      <a href="/popular/">Popular</a>
+      <a href="/nodes/">Nodes</a>
+  </div>
+  </nav>
+  <div id="main">
+    <div id="content">
+      {% block content %}
+        
+      {% endblock %}
+    </div>
+    <div id="sidebar">
+      {% block sidebar %}
+      {% endblock %}
+      {% block sidebar-status %}
+        <div id="forum-status">
+          <ul>
+            <li>Members: {{ forum_info.members }}</li>
+            <li>Nodes: {{ forum_info.nodes }}</li>
+            <li>Topics: {{ forum_info.topics }}</li>
+            <li>Replies: {{ forum_info.replies }}</li>
+          </ul>
+        </div>
+      {% endblock %}
+    </div>
+  </div>
+  <footer id="footer">
+    <span id="powered-by">Powered by <a href="https://www.djangoproject.com/">Django</a>.</span>
+  </footer>
+</body>
+</html>

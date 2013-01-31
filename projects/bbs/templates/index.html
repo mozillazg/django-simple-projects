@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div id ="ui-header"><a href="/">Hello forum</a> >> 
+  {% block node-nav %}{{ nav_name|default:"Latest" }}{% endblock %}
+</div>
+<div id="ui-main">
+  {% for topic in topics %}
+  <div class="ui-topic-list">
+    <div class="ui-topic-header">
+      <span class="ui-topic-title">[<a href="/node/{{ topic.node.id}}/">{{ topic.node.title }}</a>] <a href="/topic/{{ topic.id }}">{{ topic.title }}</a>
+        ({{ topic.reply_count }} replies, {{ topic.hits }} hits)</span>
+      <span class="ui-topic-info">by {{ topic.user.username }} at {{ topic.created }}</span>
+    </div>
+  </div>
+  {% endfor %}
+
+  <div id="page-nav">
+    {% for page_number in topics.paginator.page_range %}
+      {% ifequal page_number topics.number %}
+        {{ page_number }}
+      {% else %}
+        {% if node_id %}
+        <a href="/node/{{ node_id }}/page/{{ page_number }}/">{{ page_number }}</a>
+        {% else %}
+            <a href="/page/{{ page_number }}/">{{ page_number }}</a>
+        {% endif %}
+      {% endifequal %}
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

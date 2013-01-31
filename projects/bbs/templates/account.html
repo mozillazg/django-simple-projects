@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<p>Login count: {{ user.get_profile.login_count }}</p>
+
+<form action="/account/password" method="POST">{% csrf_token %}
+
+  {{ form.as_p }}
+
+  <input type="submit" value="Change Password" />
+</form>
+
+{% endblock %}

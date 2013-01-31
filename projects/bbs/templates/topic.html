@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}
+  {{ topic.title }} | {{ block.super }}
+{% endblock %}
+
+
+{% block content %}
+  <div id="topic-header">
+    <div class="topic-title">
+      <a href="/topic/{{ topic.id }}">{{ topic.title }}</a>
+    </div>
+    <div class="topic-content">
+      {{ topic.content|linebreaks }}
+    </div>
+    <div class="topic-info">
+      by {{ topic.user.username }} at {{ topic.created }}
+    </div>
+  </div>
+  <div class="topic-replies">
+    {% load comments %}
+    {% get_comment_count for topic as reply_count %}
+    <p>{{ reply_count }} Replies: </p>
+    {% get_comment_list for topic as replies %}
+    {% for reply in replies %}
+      <div class="reply-main" id="reply-{{ reply.id }}">
+        <div class="reply-content">{{ reply.comment|linebreaks }}</div>
+        <div class="reply-info">by {{ reply.user_name }} at {{ reply.submit_date }}
+          <a name="c{{ comment.id }}"></a>
+          <a href="{% get_comment_permalink reply %}">
+              permalink for comment #{{ forloop.counter }}
+          </a>
+        </div>
+      </div>
+    {% endfor %}
+    <div class="page-number">
+      <p>
+      </p>
+    </div>
+  </div>
+  <div id="topic-footer">
+    {% if user.is_authenticated %}
+    <div id="reply-form">
+      {% get_comment_form for topic as form %}
+      <form action="{% comment_form_target %}" method="post"> {% csrf_token %}
+        {{ form.as_p }}
+        <input type="hidden" name="next" value="/topic/{{ topic.id}}" />
+        <input type="submit" value="Reply" />
+      </form>
+    </div>
+    {% else %}
+      <div id="reply-tip">
+        Want to comment ?
+      </div>
+      <a href="/account/signin">Sign In</a>
+    {% endif %}
+  </div>
+{% endblock %}

@@ -1,0 +1,73 @@
+header#header {
+  height: 50px;
+}
+#header #header-center {
+  width: 70%;
+  margin: auto;
+}
+#header-center #forum-title {
+  float: left;
+}
+#forum-title h1 {
+  margin: 0;
+}
+#header-center #user-tools {
+  float: right;
+  margin-right: 5%;
+}
+nav#nav #nav-center {
+  width: 70%;
+  margin: auto;
+  text-align: center;
+}
+#nav-center a {
+  margin: 5px;
+}
+#main {
+  width: 70%;
+  margin: auto;
+}
+#main #content {
+  float: left;
+  width: 65%;
+}
+.ui-topic-list {
+  line-height: 50px;
+  border-bottom: 1px solid #DADADA;
+}
+.ui-topic-info {
+  /*float: right;*/
+}
+#topic-header {
+  margin: 10px;
+  padding: 10px;
+  border-bottom: 1px solid #DADADA;
+}
+#topic-footer {
+  clear: both;
+}
+.reply-main {
+  clear: both;
+}
+.reply-content {
+  /*float: left;*/
+  border-bottom: 1px solid #DADADA;
+}
+.reply-info {
+  /*float: right;*/
+}
+
+
+
+
+#main #sidebar {
+  float: left;
+}
+
+
+
+
+footer#footer {
+  clear: both;
+  text-align: center;
+}

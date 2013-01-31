@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div id ="ui-header"><a href="/">Hello forum</a> >> 
+  {% block node-nav %}{{ nav_name|default:"Latest" }}{% endblock %}
+</div>
+
+  <div id="nodes">
+    {% for node in nodes %}
+      <div class="node-list">
+        <p><a href="/node/{{ node.id }}/">{{ node.title }}</a>
+          ({{ node.topic_count }} topics)</p>
+        <p>{{ node.description }}</p>
+      </div>
+    {% endfor %}
+  </div>
+
+{% endblock %}
