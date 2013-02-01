@@ -1,0 +1,5 @@
+{% load hello_extras %}
+
+{% for user in users %}
+  <p>{{ user|help_text:"name" }}：{{ user.name }}</p>
+{% endfor %}
