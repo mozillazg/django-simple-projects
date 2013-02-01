@@ -1,0 +1,7 @@
+Categories:
+<ul>
+  {# 自定义的 context processor 函数的返回值是：{'categories': all_categories}，该字典的 key 可以直接在模板中作为变量使用 #}
+  {% for category in categories %}
+    <li>{{ category.title }}</li>
+  {% endfor %}
+</ul>
