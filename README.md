@@ -1,1 +1,1 @@
-一些简单的 django 项目。
+一些简单的 django DEMO
